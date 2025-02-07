@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
@@ -11,35 +11,7 @@ type Pareja = [string, string];
 const DashboardContainer = () => {
 
     const {state, dispatch} = usePeopleContext();
-
-
-    const setPeople = async () => {
-        dispatch({
-            type: "SET_LOADING",
-            payload: true
-        })
-
-        await new Promise((resolve) => setTimeout(resolve, 3000))
-
-        dispatch({
-            type: "SET_PEOPLE",
-            payload: [
-                'Ana', 'Carlos', 'Elena', 'Gabriel', 'Isabel',
-                'Juan', 'Karla', 'Luis', 'María', 'Nora'
-            ]
-        })
-
-        dispatch({
-            type: "SET_LOADING",
-            payload: false
-        })
-    }
-
-
-    useEffect(() => {
-        setPeople()
-    }, [])
-
+   
 
     const [grupo1, setGrupo1] = useState<string[]>([
         'Ana', 'Carlos', 'Elena', 'Gabriel', 'Isabel',
@@ -106,12 +78,12 @@ const DashboardContainer = () => {
                 </Button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <DrumCard data={state.group} title='Grupo 1' type={1} />
-                <DrumCard data={grupo2} title='Grupo 2' type={1} />
+                <DrumCard data={state.group_one} title='Grupo 1' type={1} />
+                <DrumCard data={state.group_two} title='Grupo 2' type={1} />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <DrumCard data_couples={parejas} title='Parejas Generadas' type={2} />
-                <DrumCard crosses={cruces} title='Cruces' type={3} />
+                <DrumCard data_couples={state.couples} title='Parejas Generadas' type={2} />
+                <DrumCard crosses={state.crosses} title='Cruces' type={3} />
             </div>
 
             <Dialog open={parejaModal !== null} onOpenChange={() => setParejaModal(null)}>

@@ -1,1 +1,1 @@
-export type Couples = [string, string];
+export type Couples = [string, string][];

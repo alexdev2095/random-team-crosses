@@ -6,10 +6,10 @@ const reducer = (state: PeopleStateType, action: TAction): PeopleStateType => {
   switch (type) {
     case "REMOVE_PERSON":
       console.log(state)
-      return { ...state, group: [action.payload] };
+      return { ...state, group_one: [action.payload] };
     case "SET_PEOPLE":
         console.log(state)
-        return { ...state, group: action.payload };  
+        return { ...state, group_one: action.payload };  
     case "SET_LOADING":  
       return { ...state, loading: action.payload }; 
     default:

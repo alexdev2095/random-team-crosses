@@ -5,14 +5,18 @@ import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { Users, Shuffle } from 'lucide-react'
+import { usePeopleContext } from '@/sections/home/store/people'
 
 type Pareja = [string, string];
 
 export default function ParejasYCruces() {
+  const peopleContext = usePeopleContext();
+
   const [grupo1, setGrupo1] = useState<string[]>([
     'Ana', 'Carlos', 'Elena', 'Gabriel', 'Isabel',
     'Juan', 'Karla', 'Luis', 'María', 'Nora'
   ])
+ 
   const [grupo2, setGrupo2] = useState<string[]>([
     'Oscar', 'Patricia', 'Quentin', 'Rosa', 'Sergio',
     'Teresa', 'Ulises', 'Valeria', 'Walter', 'Ximena'
@@ -80,7 +84,7 @@ export default function ParejasYCruces() {
           </CardHeader>
           <CardContent>
             <ul>
-              {grupo1.map((persona, index) => (
+              {peopleContext.state.group_one.map((persona, index) => (
                 <li key={index}>{persona}</li>
               ))}
             </ul>
@@ -92,9 +96,12 @@ export default function ParejasYCruces() {
           </CardHeader>
           <CardContent>
             <ul>
-              {grupo2.map((persona, index) => (
+            {peopleContext.state.group_one.map((persona, index) => (
                 <li key={index}>{persona}</li>
               ))}
+              {/* {grupo2.map((persona, index) => (
+                <li key={index}>{persona}</li>
+              ))} */}
             </ul>
           </CardContent>
         </Card>
