@@ -44,6 +44,13 @@ const DashboardContainer = () => {
         }
     }
 
+    const onTriggerCruce = () => {
+        dispatch({
+          type: "TRIGGER_CRUCE",
+          payload: []
+        });
+      };
+
     const hayParejasParesFormadas = parejas.length >= 2 && parejas.length % 2 === 0
     const crucesPendientes = parejasDisponibles.length >= 2
 
@@ -57,7 +64,7 @@ const DashboardContainer = () => {
                 <Button onClick={prepararCruces} disabled={!hayParejasParesFormadas || parejasDisponibles.length > 0}>
                     <Shuffle className="mr-2 h-4 w-4" /> Preparar Cruces
                 </Button>
-                <Button onClick={generarCruce} disabled={!crucesPendientes}>
+                <Button onClick={onTriggerCruce} >
                     <Shuffle className="mr-2 h-4 w-4" /> Generar Cruce
                 </Button>
             </div>

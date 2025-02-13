@@ -1,6 +1,6 @@
 import { Couples } from "../../types/types";
 
-export type PeopleStoreTypes = "REMOVE_PERSON" | "SET_PEOPLE" | "SET_LOADING" | "SET_COUPLE";
+export type PeopleStoreTypes = "REMOVE_PERSON" | "SET_PEOPLE" | "SET_LOADING" | "SET_COUPLE" | "TRIGGER_CRUCE";
 
 type Action<T> = {
     type: PeopleStoreTypes;
@@ -23,5 +23,9 @@ interface ISetCouple extends Action<Couples | undefined>{
     type: "SET_COUPLE";
 } 
 
+interface ITriggerCruce extends Action<[Couples, Couples]> {
+    type: "TRIGGER_CRUCE";
+  }
 
-export type TAction = IDeletePerson | ISetPeople | ISetLoading | ISetCouple;
+
+export type TAction = IDeletePerson | ISetPeople | ISetLoading | ISetCouple | ITriggerCruce;

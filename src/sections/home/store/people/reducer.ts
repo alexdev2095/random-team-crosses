@@ -1,4 +1,4 @@
-import { CouplesString } from "../../types/types";
+import { Couples, CouplesString } from "../../types/types";
 import { TAction } from "./actions";
 import { PeopleStateType } from "./initialState";
 
@@ -31,6 +31,25 @@ const reducer = (state: PeopleStateType, action: TAction): PeopleStateType => {
         };
       }
       return state;
+      case "TRIGGER_CRUCE":
+        if (state.couples.length >= 2) {
+          // Barajar las parejas
+          const parejasBarajadas = [...state.couples].sort(() => Math.random() - 0.5);
+  
+          // Tomar las dos primeras parejas
+          const coupleOne = parejasBarajadas[0];
+          const coupleTwo = parejasBarajadas[1];
+  
+          // Crear el cruce
+          const nuevoCruce: [Couples, Couples] = [coupleOne, coupleTwo];
+  
+          return {
+            ...state,
+            crosses: [...state.crosses, nuevoCruce], // Añadir el cruce
+            couples: parejasBarajadas.slice(2), // Eliminar las parejas usadas
+          };
+        }
+        return state
     default:
       return state;
   }
