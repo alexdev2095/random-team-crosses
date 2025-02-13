@@ -11,38 +11,22 @@ type Pareja = [string, string];
 const DashboardContainer = () => {
 
     const {state, dispatch} = usePeopleContext();
-   
 
-    const [grupo1, setGrupo1] = useState<string[]>([
-        'Ana', 'Carlos', 'Elena', 'Gabriel', 'Isabel',
-        'Juan', 'Karla', 'Luis', 'María', 'Nora'
-    ])
-    const [grupo2, setGrupo2] = useState<string[]>([
-        'Oscar', 'Patricia', 'Quentin', 'Rosa', 'Sergio',
-        'Teresa', 'Ulises', 'Valeria', 'Walter', 'Ximena'
-    ])
     const [parejas, setParejas] = useState<Pareja[]>([])
     const [cruces, setCruces] = useState<[Pareja, Pareja][]>([])
     const [parejasDisponibles, setParejasDisponibles] = useState<Pareja[]>([])
     const [parejaModal, setParejaModal] = useState<Pareja | null>(null)
     const [cruceModal, setCruceModal] = useState<[Pareja, Pareja] | null>(null)
 
-    const generarPareja = () => {
-        if (grupo1.length > 0 && grupo2.length > 0) {
-            const indice1 = Math.floor(Math.random() * grupo1.length)
-            const indice2 = Math.floor(Math.random() * grupo2.length)
 
-            const persona1 = grupo1[indice1]
-            const persona2 = grupo2[indice2]
+    const onAddCouples = () => {
+        dispatch({
+          type: "SET_COUPLE",
+          payload: []
+        });
+      };
 
-            const nuevaPareja: Pareja = [persona1, persona2]
-            setParejas([...parejas, nuevaPareja])
-            setParejaModal(nuevaPareja)
 
-            setGrupo1(grupo1.filter((_, index) => index !== indice1))
-            setGrupo2(grupo2.filter((_, index) => index !== indice2))
-        }
-    }
 
     const prepararCruces = () => {
         setParejasDisponibles([...parejas].sort(() => Math.random() - 0.5))
@@ -67,7 +51,7 @@ const DashboardContainer = () => {
         <div className="container mx-auto p-4">
             <h1 className="text-2xl font-bold mb-4 text-center">Generador de Parejas y Cruces</h1>
             <div className="flex flex-wrap justify-center gap-4 mb-4">
-                <Button onClick={generarPareja} disabled={grupo1.length === 0 || grupo2.length === 0}>
+                <Button onClick={onAddCouples} disabled={state.group_one.length === 0 || state.group_two.length === 0}>
                     <Users className="mr-2 h-4 w-4" /> Generar Pareja
                 </Button>
                 <Button onClick={prepararCruces} disabled={!hayParejasParesFormadas || parejasDisponibles.length > 0}>

@@ -1,4 +1,6 @@
-export type PeopleStoreTypes = "REMOVE_PERSON" | "SET_PEOPLE" | "SET_LOADING";
+import { Couples } from "../../types/types";
+
+export type PeopleStoreTypes = "REMOVE_PERSON" | "SET_PEOPLE" | "SET_LOADING" | "SET_COUPLE";
 
 type Action<T> = {
     type: PeopleStoreTypes;
@@ -17,5 +19,9 @@ interface ISetLoading extends Action<boolean>{
     type: "SET_LOADING";
 } 
 
+interface ISetCouple extends Action<Couples | undefined>{
+    type: "SET_COUPLE";
+} 
 
-export type TAction = IDeletePerson | ISetPeople | ISetLoading;
+
+export type TAction = IDeletePerson | ISetPeople | ISetLoading | ISetCouple;

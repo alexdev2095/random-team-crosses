@@ -13,7 +13,7 @@ const initialState: PeopleStateType = {
     'Juan', 'Karla', 'Luis', 'María', 'Nora'],
     group_two: ['Oscar', 'Patricia', 'Quentin', 'Rosa', 'Sergio',
         'Teresa', 'Ulises', 'Valeria', 'Walter', 'Ximena'],
-    couples: [['ale','yo'], ['ale','yo']],
+    couples: [],
     crosses:[[[['ale','yo'],['ale','yo']],[['ale','yo'], ['ale','yo']]]],    
     loading: false,
 };
