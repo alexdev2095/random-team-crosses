@@ -1,4 +1,4 @@
-import { Couples } from "../../types/types";
+import { Couples, CouplesString } from "../../types/types";
 
 export type PeopleStoreTypes = "REMOVE_PERSON" | "SET_PEOPLE" | "SET_LOADING" | "SET_COUPLE" | "TRIGGER_CRUCE";
 
@@ -23,7 +23,7 @@ interface ISetCouple extends Action<Couples | undefined>{
     type: "SET_COUPLE";
 } 
 
-interface ITriggerCruce extends Action<[Couples, Couples]> {
+interface ITriggerCruce extends Action<undefined> {
     type: "TRIGGER_CRUCE";
   }
 

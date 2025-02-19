@@ -22,8 +22,10 @@ const DrumCard: React.FC<DataProps> = ({
       return <p>No hay datos disponibles.</p>;
     }
 
-    if (type === 3 && Array.isArray(items[0])) {
-      const values = items[0];
+
+
+    if (type === 3 && Array.isArray(items)) {
+      const values = items;
         return (
           <ul>
             {values.map((item, index) => (

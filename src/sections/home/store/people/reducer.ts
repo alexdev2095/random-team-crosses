@@ -1,4 +1,4 @@
-import { Couples, CouplesString } from "../../types/types";
+import {  CouplesString } from "../../types/types";
 import { TAction } from "./actions";
 import { PeopleStateType } from "./initialState";
 
@@ -41,15 +41,17 @@ const reducer = (state: PeopleStateType, action: TAction): PeopleStateType => {
           const coupleTwo = parejasBarajadas[1];
   
           // Crear el cruce
-          const nuevoCruce: [Couples, Couples] = [coupleOne, coupleTwo];
+          const newCruce: [CouplesString, CouplesString] = [coupleOne, coupleTwo];
   
-          return {
+          const newState = {
             ...state,
-            crosses: [...state.crosses, nuevoCruce], // Añadir el cruce
+            crosses: [...state.crosses, newCruce], // Añadir el cruce al array existente
             couples: parejasBarajadas.slice(2), // Eliminar las parejas usadas
           };
+      
+          return newState;
         }
-        return state
+        return state;
     default:
       return state;
   }

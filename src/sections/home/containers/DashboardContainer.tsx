@@ -12,9 +12,6 @@ const DashboardContainer = () => {
 
     const {state, dispatch} = usePeopleContext();
 
-    const [parejas, setParejas] = useState<Pareja[]>([])
-    const [cruces, setCruces] = useState<[Pareja, Pareja][]>([])
-    const [parejasDisponibles, setParejasDisponibles] = useState<Pareja[]>([])
     const [parejaModal, setParejaModal] = useState<Pareja | null>(null)
     const [cruceModal, setCruceModal] = useState<[Pareja, Pareja] | null>(null)
 
@@ -28,43 +25,26 @@ const DashboardContainer = () => {
 
 
 
-    const prepararCruces = () => {
-        setParejasDisponibles([...parejas].sort(() => Math.random() - 0.5))
-        setCruces([])
-    }
-
-    const generarCruce = () => {
-        if (parejasDisponibles.length >= 2) {
-            const pareja1 = parejasDisponibles.pop()!
-            const pareja2 = parejasDisponibles.pop()!
-            const nuevoCruce: [Pareja, Pareja] = [pareja1, pareja2]
-            setCruces([...cruces, nuevoCruce])
-            setCruceModal(nuevoCruce)
-            setParejasDisponibles([...parejasDisponibles])
-        }
-    }
-
     const onTriggerCruce = () => {
         dispatch({
           type: "TRIGGER_CRUCE",
-          payload: []
         });
       };
 
-    const hayParejasParesFormadas = parejas.length >= 2 && parejas.length % 2 === 0
-    const crucesPendientes = parejasDisponibles.length >= 2
+    const emptyGroups = state.group_one.length === 0 || state.group_two.length === 0
+    const pendingCrosses = state.couples.length >= 2 && state.group_one.length === 0;
 
     return (
         <div className="container mx-auto p-4">
             <h1 className="text-2xl font-bold mb-4 text-center">Generador de Parejas y Cruces</h1>
             <div className="flex flex-wrap justify-center gap-4 mb-4">
-                <Button onClick={onAddCouples} disabled={state.group_one.length === 0 || state.group_two.length === 0}>
+                <Button onClick={onAddCouples} disabled={emptyGroups}>
                     <Users className="mr-2 h-4 w-4" /> Generar Pareja
                 </Button>
-                <Button onClick={prepararCruces} disabled={!hayParejasParesFormadas || parejasDisponibles.length > 0}>
+                {/* <Button onClick={prepararCruces} disabled={!hayParejasParesFormadas || parejasDisponibles.length > 0}>
                     <Shuffle className="mr-2 h-4 w-4" /> Preparar Cruces
-                </Button>
-                <Button onClick={onTriggerCruce} >
+                </Button> */}
+                <Button onClick={onTriggerCruce} disabled={!pendingCrosses }>
                     <Shuffle className="mr-2 h-4 w-4" /> Generar Cruce
                 </Button>
             </div>
@@ -108,6 +88,7 @@ const DashboardContainer = () => {
                     </DialogDescription>
                 </DialogContent>
             </Dialog>
+           
         </div>
     )
 }
